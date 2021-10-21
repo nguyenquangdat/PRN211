@@ -1,0 +1,50 @@
+﻿@model IEnumerable<Project.Models.Roles>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+<table class="table">
+    <tr>
+        <th>
+            ID
+        </th>
+        <th>
+            Role Name
+        </th>
+        <th>Action</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.RoleID)
+            </td><td>
+                @Html.DisplayFor(modelItem => item.RoleName)
+            </td>
+            <td>
+                <form action="/Admin/Product/Delete/@item.RoleID" method="post">
+                    @Html.AntiForgeryToken()
+                    <a href="/Admin/Product/Edit/@item.RoleID">
+                        <i class="fas fa-edit"></i>
+                    </a>
+                    <a href="/Admin/Product/Details/@item.RoleID">
+                        <i class="fas fa-info-circle"></i>
+                    </a>
+                    <button class="bg-transparent border-0" type="submit" onclick="return confirm('Are you sure to delete this Role?');">
+                        <i class="fas fa-trash-alt"></i>
+                    </button>
+                </form>
+            </td>
+        </tr>
+    }
+
+</table>

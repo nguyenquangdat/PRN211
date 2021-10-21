@@ -1,0 +1,71 @@
+﻿@model IEnumerable<Project.Models.User>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Roles.RoleName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UserName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UserEmail)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UserPhone)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UserPassword)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UserAddress)
+        </th>
+        <th>Action</th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Roles.RoleName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UserName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UserEmail)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UserPhone)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UserPassword)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UserAddress)
+        </td>
+        <td>
+            <form action="/Admin/Product/Delete/@item.UserID" method="post">
+                @Html.AntiForgeryToken()
+                <a href="/Admin/Product/Edit/@item.UserID">
+                    <i class="fas fa-edit"></i>
+                </a>
+                <a href="/Admin/Product/Details/@item.UserID">
+                    <i class="fas fa-info-circle"></i>
+                </a>
+                <button class="bg-transparent border-0" type="submit" onclick="return confirm('Are you sure to delete this User?');">
+                    <i class="fas fa-trash-alt"></i>
+                </button>
+            </form>
+        </td>
+    </tr>
+}
+
+</table>

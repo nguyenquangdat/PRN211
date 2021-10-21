@@ -1,0 +1,32 @@
+﻿@using Project.Models
+@model Product
+
+
+@{ ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml"; }
+<br />
+
+<CENTER>
+    <div>
+        <h2>What are our products?</h2>
+        @if (Model.TagID == 1)
+        {<img src="@Url.Content("~/ProductImage/Adidas/" + Model.Image)" alt="" />}
+        @if (Model.TagID == 2)
+        {<img src="@Url.Content("~/ProductImage/Nike/" + Model.Image)" alt="" />}
+        @if (Model.TagID == 3)
+        {<img src="@Url.Content("~/ProductImage/Lacoste/" + Model.Image)" alt="" />}
+        @if (Model.TagID == 4)
+        {<img src="@Url.Content("~/ProductImage/MLB/" + Model.Image)" alt="" />}
+        @if (Model.TagID == 5)
+        {<img src="@Url.Content("~/ProductImage/Kenzo/" + Model.Image)" alt="" />}
+        <br />
+        <h3> @Model.ProductName</h3>
+        <h3 style="color:red">Price: @Model.ProductPrice</h3>
+        <br />
+        @Model.ProductDescription
+        <br />
+
+        <input type="submit" value="Buy" id="bgnCart" />
+
+    </div>
+</CENTER>

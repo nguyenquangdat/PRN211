@@ -1,0 +1,124 @@
+﻿@*//Install-Package PagedList.Mvc -Version 4.5.0! Tải về thư viện phân trang*@
+@model PagedList.IPagedList<Project.Models.Product>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Product Manager</h2>
+
+<p>
+    <button class="btn-default">@Html.ActionLink("Create", "Create")</button>
+</p>
+<table class="table table-bordered">
+    <tr>
+
+        <th>
+            Product Name
+        </th>
+        <th>
+            Price
+        </th>
+        <th>
+            In Stock
+        </th>
+        <th>
+            Desciption
+        </th>
+
+        <th>
+            Published
+        </th>
+        <th>
+            Image
+        </th>
+        <th>
+            Category
+        </th>
+        <th>
+            Tag
+        </th>
+        <th>
+            Status
+        </th>
+        <th>
+            Action
+        </th>
+
+
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+
+            <td>
+                @item.ProductName
+            </td>
+            <td>
+                @item.ProductPrice.ToString()
+            </td>
+            <td>
+                @item.Stock.ToString()
+            </td>
+            <td>
+                @item.ProductDescription
+            </td>
+            <td>
+                @item.ProductDate.ToShortDateString()
+            </td>
+            <td>
+
+                @if (item.TagID == 1)
+                {<img src="@Url.Content("~/ProductImage/Adidas/" + item.Image)" width="50" height="50" />}
+                @if (item.TagID == 2)
+                {<img src="@Url.Content("~/ProductImage/Nike/" + item.Image)" width="50" height="50" />}
+                @if (item.TagID == 3)
+                {<img src="@Url.Content("~/ProductImage/Lacoste/" + item.Image)" width="50" height="50" />}
+                @if (item.TagID == 4)
+                {<img src="@Url.Content("~/ProductImage/MLB/" + item.Image)" width="50" height="50" />}
+                @if (item.TagID == 5)
+                {<img src="@Url.Content("~/ProductImage/Kenzo/" + item.Image)" width="50" height="50" />}
+
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Categories.CategoryName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tags.TagName)
+            </td>
+            <td>
+                @if (item.IsNewProduct == true)
+                {<p style="color:coral">New Arrival</p>}
+
+            <td>
+                @*@Html.ActionLink("Edit", "Edit", new { id = item.ProductID })|
+                    @Html.ActionLink("Details", "Details", new { id = item.ProductID }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.ProductID })*@
+                <form action="/Admin/Product/Delete/@item.ProductID" method="post">
+                    @Html.AntiForgeryToken()
+                    <a href="/Admin/Product/Edit/@item.ProductID">
+                        <i class="fas fa-edit"></i>
+                    </a>
+                    <a href="/Admin/Product/Details/@item.ProductID">
+                        <i class="fas fa-info-circle"></i>
+                    </a>
+                    <button class="bg-transparent border-0" type="submit" onclick="return confirm('Are you sure to delete this post?');">
+                        <i class="fas fa-trash-alt"></i>
+                    </button>
+                </form>
+            </td>
+        </tr>
+    }
+
+</table>
+<!-- Thêm mã phân trang -->
+<br />
+
+    Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
+
+    @Html.PagedListPager(Model, page => Url.Action("Index",
+        new { page }))
+
+    <!-- End -->
