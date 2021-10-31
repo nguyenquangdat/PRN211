@@ -1,4 +1,5 @@
-﻿using Project.DBcontext;
+﻿using OfficeOpenXml;
+using Project.DBcontext;
 using Project.Models;
 using System;
 using System.Collections.Generic;
@@ -110,6 +111,53 @@ namespace Project.Areas.Admin.Controllers
                 sugasContext.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        public void ExportToExcel()
+        {
+            var users = sugasContext.Users.ToList();
+
+            ExcelPackage.LicenseContext = LicenseContext.Commercial;
+            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+
+            ExcelPackage excelPackage = new ExcelPackage();
+            //add new ExcelSheet
+            ExcelWorksheet ws = excelPackage.Workbook.Worksheets.Add("Report");
+            // process our database dât in excelSheet
+            ws.Cells["A1"].Value = "Report";
+            ws.Cells["B1"].Value = "Report1";
+
+            ws.Cells["A2"].Value = "Date";
+            ws.Cells["B2"].Value = string.Format("{0:dd MMM yyy} at {0:H: mm tt}", DateTimeOffset.Now);
+
+            ws.Cells["A5"].Value = "UserID";
+            ws.Cells["B5"].Value = "UserName";
+            ws.Cells["C5"].Value = "UserEmail";
+            ws.Cells["D5"].Value = "UserPhone";
+            ws.Cells["E5"].Value = "RoleID";
+            ws.Cells["F5"].Value = "UserAddress";
+           
+
+            int rows = 6;
+            foreach (var item in users)
+            {
+                ws.Cells[String.Format("A{0}", rows)].Value = item.UserID;
+                ws.Cells[String.Format("B{0}", rows)].Value = item.UserName;
+                ws.Cells[String.Format("C{0}", rows)].Value = item.UserEmail;
+                ws.Cells[String.Format("D{0}", rows)].Value = item.UserPhone;
+                ws.Cells[String.Format("E{0}", rows)].Value = item.RoleID;
+                ws.Cells[String.Format("F{0}", rows)].Value = item.UserAddress;
+
+                rows++;
+
+            }
+
+            ws.Cells["A:AZ"].AutoFitColumns();
+            Response.Clear();
+            Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+            Response.AddHeader("content-disposittion", "attachment: filename=" + "ExcelReport.xlsx");
+            Response.BinaryWrite(excelPackage.GetAsByteArray());
+            Response.End();
         }
     }
 }

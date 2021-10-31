@@ -1,4 +1,5 @@
-﻿using Project.DBcontext;
+﻿using OfficeOpenXml;
+using Project.DBcontext;
 using Project.Models;
 using System;
 using System.Collections.Generic;
@@ -123,5 +124,43 @@ namespace Project.Areas.Admin.Controllers
             base.Dispose(disposing);
         }
 
+        public void ExportToExcel()
+        {
+            var categories = sugasContext.Categories.ToList();
+
+            ExcelPackage.LicenseContext = LicenseContext.Commercial;
+            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+
+            ExcelPackage excelPackage = new ExcelPackage();
+            //add new ExcelSheet
+            ExcelWorksheet ws = excelPackage.Workbook.Worksheets.Add("Report");
+            // process our database dât in excelSheet
+            ws.Cells["A1"].Value = "Report";
+            ws.Cells["B1"].Value = "Report1";
+
+            ws.Cells["A2"].Value = "Date";
+            ws.Cells["B2"].Value = string.Format("{0:dd MMM yyy} at {0:H: mm tt}", DateTimeOffset.Now);
+
+            ws.Cells["A5"].Value = "CategoryID";
+            ws.Cells["B5"].Value = "CategoryName";
+          
+
+            int rows = 6;
+            foreach (var item in categories)
+            {
+                ws.Cells[String.Format("A{0}", rows)].Value = item.CategoryID;
+                ws.Cells[String.Format("B{0}", rows)].Value = item.CategoryName;
+      
+                rows++;
+
+            }
+
+            ws.Cells["A:AZ"].AutoFitColumns();
+            Response.Clear();
+            Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+            Response.AddHeader("content-disposittion", "attachment: filename=" + "ExcelReport.xlsx");
+            Response.BinaryWrite(excelPackage.GetAsByteArray());
+            Response.End();
+        }
     }
 }

@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using PagedList;
 using Project.Models;
+using OfficeOpenXml;
 
 namespace Project.Areas.Admin.Controllers
 {
@@ -143,6 +144,57 @@ namespace Project.Areas.Admin.Controllers
             {
                 return View();
             }
+        }
+
+        public void ExportToExcel()
+        {
+            var products = sugasContext.Products.ToList();
+
+            ExcelPackage.LicenseContext = LicenseContext.Commercial;
+            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+
+            ExcelPackage excelPackage = new ExcelPackage();
+            //add new ExcelSheet
+            ExcelWorksheet ws = excelPackage.Workbook.Worksheets.Add("Report");
+            // process our database dât in excelSheet
+            ws.Cells["A1"].Value = "Report";
+            ws.Cells["B1"].Value = "Report1";
+
+            ws.Cells["A2"].Value = "Date";
+            ws.Cells["B2"].Value = string.Format("{0:dd MMM yyy} at {0:H: mm tt}", DateTimeOffset.Now);
+
+            ws.Cells["A5"].Value = "ProductID";
+            ws.Cells["B5"].Value = "ProductDescription";
+            ws.Cells["C5"].Value = "ProductPrice";
+            ws.Cells["D5"].Value = "ProductName";
+            ws.Cells["E5"].Value = "Stock";
+            ws.Cells["F5"].Value = "IsNewProduct";
+            ws.Cells["G5"].Value = "ProductDate";
+            ws.Cells["H5"].Value = "Image";
+            ws.Cells["I5"].Value = "TagID";
+
+            int rows = 6;
+            foreach(var item in products)
+            {
+                ws.Cells[String.Format("A{0}", rows)].Value = item.ProductID;
+                ws.Cells[String.Format("B{0}", rows)].Value = item.ProductDescription;
+                ws.Cells[String.Format("C{0}", rows)].Value = item.ProductPrice;
+                ws.Cells[String.Format("D{0}", rows)].Value = item.ProductName;
+                ws.Cells[String.Format("E{0}", rows)].Value = item.Stock;
+                ws.Cells[String.Format("F{0}", rows)].Value = item.IsNewProduct;
+                ws.Cells[String.Format("G{0}", rows)].Value = item.ProductDate;
+                ws.Cells[String.Format("H{0}", rows)].Value = item.Image;
+                ws.Cells[String.Format("I{0}", rows)].Value = item.TagID;
+                rows++;
+
+            }
+
+            ws.Cells["A:AZ"].AutoFitColumns();
+            Response.Clear();
+            Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+            Response.AddHeader("content-disposittion", "attachment: filename=" + "ExcelReport.xlsx");
+            Response.BinaryWrite(excelPackage.GetAsByteArray());
+            Response.End();
         }
     }
 }
