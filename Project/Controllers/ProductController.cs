@@ -9,6 +9,7 @@ using PagedList;
 
 namespace Project.Controllers
 {
+    
     public class ProductController : Controller
     {
         SugasContext sugasContext = new SugasContext();

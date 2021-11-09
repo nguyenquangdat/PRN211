@@ -5,13 +5,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 
 namespace Project.Controllers
 {
     public class UserController : Controller
     {
         SugasContext sugasContext = new SugasContext();
-        // GET: Register User View
+        // GET: Register User Views
         public ActionResult Register()
         {
             return View();
@@ -24,6 +25,7 @@ namespace Project.Controllers
         {
             try
             {
+                user.RoleID = 2;
                 // Thêm người dùng  mới
                 sugasContext.Users.Add(user);
                 // Lưu lại vào cơ sở dữ liệu
@@ -62,11 +64,13 @@ namespace Project.Controllers
             {
                 if(userMail == "Admin@gmail.com")
                 {
+                    FormsAuthentication.SetAuthCookie(userMail, false);
                     Session["use"] = isLogin;
                     return RedirectToAction("Index", "Admin/Product");
                 }
                 else
                 {
+                    FormsAuthentication.SetAuthCookie(userMail, false);
                     Session["use"] = isLogin;
                     return RedirectToAction("Index", "Home");
                 }

@@ -11,6 +11,7 @@ using System.Web.Mvc;
 
 namespace Project.Areas.Admin.Controllers
 {
+    [Authorize(Roles = "ADMIN")]
     public class TagsController : Controller
     {
         private SugasContext sugasContext = new SugasContext();
