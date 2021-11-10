@@ -10,6 +10,11 @@ namespace Project.Models
     [Table("Products")]
     public class Product
     {
+        public Product()
+        {
+            Image = "~/ProductImage/Add.png";
+        }
+
         [Key]
         public int ProductID { get; set; }
 
@@ -35,5 +40,6 @@ namespace Project.Models
         public virtual Categories Categories { get; set; }
 
         public virtual Tags Tags { get; set; }
+        public HttpPostedFileBase ImageUpload { get; set; }
     }
 }

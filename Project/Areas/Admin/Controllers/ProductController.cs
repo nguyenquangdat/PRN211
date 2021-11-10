@@ -7,17 +7,20 @@ using System.Web.Mvc;
 using PagedList;
 using Project.Models;
 using OfficeOpenXml;
+using System.IO;
 
 namespace Project.Areas.Admin.Controllers
 {
-    [Authorize(Roles = "ADMIN")]
+    //[Authorize(Roles = "ADMIN")]
     public class ProductController : Controller
     {
         SugasContext sugasContext = new SugasContext();
 
         // GET: Admin/Home
-        public ActionResult Index(int? page)
+        public ActionResult Index(int? page, string searchBy, string search)
         {
+
+
             // 1. Tham số int? dùng để thể hiện null và kiểu int(số nguyên)
             // page có thể có giá trị là null ( rỗng) và kiểu int.
 
@@ -34,7 +37,10 @@ namespace Project.Areas.Admin.Controllers
             // 4.1 Toán tử ?? trong C# mô tả nếu page khác null thì lấy giá trị page, còn
             // nếu page = null thì lấy giá trị 1 cho biến pageNumber.
             int pageNumber = (page ?? 1);
-
+            if (searchBy == "NameProduct")
+            {
+                return View(sugasContext.Products.Where(s => s.ProductName.StartsWith(search)).OrderByDescending(s => s.ProductID).ToPagedList(pageNumber, pageSize));
+            }
             // 5. Trả về các sản phẩm được phân trang theo kích thước và số trang.
             return View(products.ToPagedList(pageNumber, pageSize));
         }
@@ -42,19 +48,18 @@ namespace Project.Areas.Admin.Controllers
         // Xem chi tiết người dùng GET: Admin/Home/Details/5 
         public ActionResult Details(int id)
         {
-            var productDetails = sugasContext.Products.Find(id);
-            return View(productDetails);
+            return View(sugasContext.Products.Where(s => s.ProductID == id).FirstOrDefault());
         }
 
         // Tạo sản phẩm mới phương thức GET: Admin/Home/Create
         public ActionResult Create()
         {
-            //Để tạo dropdownList bên view
-            var categoryselected = new SelectList(sugasContext.Categories, "CategoryID", "CategoryName");
-            ViewBag.CategoryID = categoryselected;
-            var tagselected = new SelectList(sugasContext.Tags, "TagID", "TagName");
-            ViewBag.TagID = tagselected;
-            return View();
+            Product product = new Product();
+            var categorySelected = new SelectList(sugasContext.Categories, "CategoryID", "CategoryName");
+            ViewBag.CategoryID = categorySelected;
+            var tagSelected = new SelectList(sugasContext.Tags, "TagID", "TagName");
+            ViewBag.TagID = tagSelected;
+            return View(product);
         }
 
         // Tạo sản phẩm mới phương thức POST: Admin/Home/Create
@@ -63,6 +68,14 @@ namespace Project.Areas.Admin.Controllers
         {
             try
             {
+                if (product.ImageUpload != null)
+                {
+                    string fileName = Path.GetFileNameWithoutExtension(product.ImageUpload.FileName);
+                    string extension = Path.GetExtension(product.ImageUpload.FileName);
+                    fileName = fileName + extension;
+                    product.Image = fileName;
+                    product.ImageUpload.SaveAs(Path.Combine(Server.MapPath("~/ProductImage/"), fileName));
+                }
                 product.ProductDate = DateTime.Now;
                 //Thêm  sản phẩm mới
                 sugasContext.Products.Add(product);
@@ -82,11 +95,10 @@ namespace Project.Areas.Admin.Controllers
         {
             // Hiển thị dropdownlist
             var product = sugasContext.Products.Find(id);
-            var categoryselected = new SelectList(sugasContext.Categories, "CategoryID", "CategoryName", product.CategoryID);
-            ViewBag.Mahang = categoryselected;
-            var taghselected = new SelectList(sugasContext.Tags, "TagID", "TagName", product.TagID);
-            ViewBag.Mahdh = taghselected;
-            // 
+            var categorySelected = new SelectList(sugasContext.Categories, "CategoryID", "CategoryName", product.CategoryID);
+            ViewBag.CategoryID = categorySelected;
+            var tagSelected = new SelectList(sugasContext.Tags, "TagID", "TagName", product.TagID);
+            ViewBag.TagID = tagSelected;
             return View(product);
 
         }
@@ -97,17 +109,16 @@ namespace Project.Areas.Admin.Controllers
         {
             try
             {
-                // Sửa sản phẩm theo mã sản phẩm
-                var oldItem = sugasContext.Products.Find(product.ProductID);
-                oldItem.ProductName = product.ProductName;
-                oldItem.ProductPrice = product.ProductPrice;
-                oldItem.Stock = product.Stock;
-                oldItem.ProductDescription = product.ProductDescription;
-                oldItem.Image = product.Image;
-                oldItem.ProductDate = product.ProductDate;
-                oldItem.CategoryID = product.CategoryID;
-                oldItem.TagID = product.TagID;
+                if (product.ImageUpload != null)
+                {
+                    string fileName = Path.GetFileNameWithoutExtension(product.ImageUpload.FileName);
+                    string extension = Path.GetExtension(product.ImageUpload.FileName);
+                    fileName = fileName + extension;
+                    product.Image = fileName;
+                    product.ImageUpload.SaveAs(Path.Combine(Server.MapPath("~/ProductImage/"), fileName));
+                }
                 // lưu lại
+                sugasContext.Entry(product).State = System.Data.Entity.EntityState.Modified;
                 sugasContext.SaveChanges();
                 // xong chuyển qua index
                 return RedirectToAction("Index");

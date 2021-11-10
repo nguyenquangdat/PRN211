@@ -211,6 +211,7 @@
     <Content Include="Areas\Content\scripts\render-scripts.js" />
     <Content Include="Areas\Content\scripts\render-scss.js" />
     <Content Include="Areas\Content\scripts\sb-watch.js" />
+    <Content Include="Areas\Content\scripts\scripts.js" />
     <Content Include="Areas\Content\scripts\start-debug.js" />
     <Content Include="Areas\Content\scripts\start.js" />
     <Content Include="Areas\Content\src\assets\demo\chart-area-demo.js" />
