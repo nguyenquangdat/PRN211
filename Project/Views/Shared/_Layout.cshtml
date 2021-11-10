@@ -14,7 +14,7 @@
     <link href="https://fonts.googleapis.com/css?family=Amatic+SC:400,700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700,800,900&display=swap"
           rel="stylesheet">
-
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
     <!-- Css Styles -->
     <link rel="stylesheet" href="~/Content/css/bootstrap.min.css" type="text/css">
     <link rel="stylesheet" href="~/Content/css/font-awesome.min.css" type="text/css">
@@ -23,6 +23,40 @@
     <link rel="stylesheet" href="~/Content/css/magnific-popup.css" type="text/css">
     <link rel="stylesheet" href="~/Content/css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="~/Content/css/style.css" type="text/css">
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#btnSendata").click(function () {
+                var firtname = $("#firtname").val();
+                var LastName = $("#lastname").val();
+                var email = $("#email").val();
+                var Subject = $("#subject").val();
+                var Message = $("#message").val();
+                
+                var Contact = {};
+                Contact.firtName = firtname;
+                Contact.LastName = LastName;
+                Contact.email = email;
+                Contact.Subject = Subject;
+                Contact.Message = Message;
+                alert(Contact);
+            $.ajax({
+            async: true,
+            type: 'POST',
+            dataType: 'JSON',
+            contentType: 'application/json; charset=utf=8',
+            url: '@Url.Action("AddContact", "Home")',
+            data: JSON.stringify(Contact),
+            success: function (data) {
+                alert(data);
+            }
+            ,
+            error: function () {
+                alert("error");
+            }
+        });
+            });
+        });
+    </script>
 </head>
 
 <body>

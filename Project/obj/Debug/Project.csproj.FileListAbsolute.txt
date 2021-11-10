@@ -280,3 +280,6 @@ C:\Users\This MC\OneDrive\Desktop\ProjectPRN211\PRN211\Project\obj\Debug\Project
 C:\Users\This MC\OneDrive\Desktop\ProjectPRN211\PRN211\Project\obj\Debug\Project.csproj.CopyComplete
 C:\Users\This MC\OneDrive\Desktop\ProjectPRN211\PRN211\Project\obj\Debug\Project.dll
 C:\Users\This MC\OneDrive\Desktop\ProjectPRN211\PRN211\Project\obj\Debug\Project.pdb
+C:\Users\This MC\OneDrive\Desktop\ProjectPRN211\PRN211\Project\obj\Debug\Project.Migrations.contact.resources
+C:\Users\This MC\OneDrive\Desktop\ProjectPRN211\PRN211\Project\obj\Debug\Project.csproj.AssemblyReference.cache
+C:\Users\This MC\OneDrive\Desktop\ProjectPRN211\PRN211\Project\obj\Debug\Project.Migrations.fixdate.resources

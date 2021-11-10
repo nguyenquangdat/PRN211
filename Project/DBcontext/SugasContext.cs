@@ -19,6 +19,7 @@ namespace Project.DBcontext
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Roles> Roles { get; set; }
         public virtual DbSet<Login> Logins { get; set; }
+        public virtual DbSet<Contact> Contacts { get; set; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<User>()

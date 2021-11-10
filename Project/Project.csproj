@@ -171,8 +171,17 @@
     <Compile Include="Migrations\202110200508182_UserLogin.Designer.cs">
       <DependentUpon>202110200508182_UserLogin.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202111101253518_contact.cs" />
+    <Compile Include="Migrations\202111101253518_contact.Designer.cs">
+      <DependentUpon>202111101253518_contact.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202111101334441_fixdate.cs" />
+    <Compile Include="Migrations\202111101334441_fixdate.Designer.cs">
+      <DependentUpon>202111101334441_fixdate.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Categories.cs" />
+    <Compile Include="Models\Contact.cs" />
     <Compile Include="Models\Login.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\Roles.cs" />
@@ -573,6 +582,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202110200508182_UserLogin.resx">
       <DependentUpon>202110200508182_UserLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202111101253518_contact.resx">
+      <DependentUpon>202111101253518_contact.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202111101334441_fixdate.resx">
+      <DependentUpon>202111101334441_fixdate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
