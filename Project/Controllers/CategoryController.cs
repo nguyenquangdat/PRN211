@@ -13,10 +13,10 @@ namespace Project.Controllers
         SugasContext sugasContext = new SugasContext();
         // GET: Category
 
-        //public ActionResult _CategoriesPartial()
-        //{
-           
-        //    return PartialView(sugasContext.Categories.ToList());
-        //}
+        public ActionResult _CategoriesPartial()
+        {
+
+            return PartialView(sugasContext.Categories.ToList());
+        }
     }
 }

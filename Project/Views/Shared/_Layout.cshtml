@@ -33,6 +33,7 @@
     </div>
 
     <!-- Search model -->
+
     <div class="search-model" style="color: white; background-image: url('../../Content/img/slider-1.jpg');">
 
 
@@ -52,6 +53,28 @@
 
 
 
+        </div>
+
+    <div class="search-model" style="color: white; background-image: url('../../Content/img/slider-1.jpg');" >
+        
+            
+           
+
+                @using (Html.BeginForm("Index", "Product"))
+                {
+                    <b>
+                        Search by:
+                    </b>
+                    @Html.RadioButton("searchBy", "NameProduct") <text>Name Product</text>
+
+                    @Html.RadioButton("searchBy", "None", true)<text>None</text>
+                    @Html.TextBox("search")<input type="submit" value="Go" class="search-trigger" />
+                }
+
+           
+            
+            
+        
 
     </div>
     <!-- Search model end -->
@@ -101,9 +124,9 @@
                         </li>
                         <li>
                             <a class="active">Category</a><ul class="sub-menu">
-                                @*<li class="product-controls">
+                                <li class="product-controls">
                                     @{ Html.RenderAction("_CategoriesPartial", "Category"); }
-                                </li>*@
+                                </li>
 
                             </ul>
 

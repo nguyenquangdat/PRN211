@@ -8,6 +8,8 @@
 <h2>Edit Product</h2>
 
 @using (Html.BeginForm("Edit", "Product", FormMethod.Post, new { enctype = "multipart/form-data" }))
+
+
 {
     @Html.AntiForgeryToken()
 
@@ -72,6 +74,7 @@
             @Html.LabelFor(model => model.Image, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 <img src="~/ProductImage/@Model.Image" style="margin:10px;height:200px;width:200px;" id="previewImage" />
+
                 <input type="file" name="ImageUpload" onchange="ShowImagePreview(this, document.getElementById('previewImage'))" />
                 @Html.ValidationMessageFor(model => model.Image, "", new { @class = "text-danger" })
             </div>

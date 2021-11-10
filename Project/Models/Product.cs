@@ -40,6 +40,9 @@ namespace Project.Models
         public virtual Categories Categories { get; set; }
 
         public virtual Tags Tags { get; set; }
+
+        [NotMapped]
+
         public HttpPostedFileBase ImageUpload { get; set; }
     }
 }

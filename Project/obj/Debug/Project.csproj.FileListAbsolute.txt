@@ -185,6 +185,7 @@ C:\Users\This MC\OneDrive\Desktop\PRN211Project\Project\bin\Microsoft.IO.Recycla
 C:\Users\This MC\OneDrive\Desktop\PRN211Project\Project\bin\System.ComponentModel.Annotations.dll
 C:\Users\This MC\OneDrive\Desktop\PRN211Project\Project\bin\EPPlus.xml
 C:\Users\This MC\OneDrive\Desktop\PRN211Project\Project\bin\Microsoft.IO.RecyclableMemoryStream.xml
+<<<<<<< Updated upstream
 C:\Users\This MC\OneDrive\Desktop\ProjectPRN211\PRN211\Project\bin\Project.dll.config
 C:\Users\This MC\OneDrive\Desktop\ProjectPRN211\PRN211\Project\bin\Project.dll
 C:\Users\This MC\OneDrive\Desktop\ProjectPRN211\PRN211\Project\bin\Project.pdb
@@ -280,6 +281,8 @@ C:\Users\This MC\OneDrive\Desktop\ProjectPRN211\PRN211\Project\obj\Debug\Project
 C:\Users\This MC\OneDrive\Desktop\ProjectPRN211\PRN211\Project\obj\Debug\Project.csproj.CopyComplete
 C:\Users\This MC\OneDrive\Desktop\ProjectPRN211\PRN211\Project\obj\Debug\Project.dll
 C:\Users\This MC\OneDrive\Desktop\ProjectPRN211\PRN211\Project\obj\Debug\Project.pdb
+=======
+>>>>>>> Stashed changes
 C:\Users\Admin\Desktop\Project\PRN211\Project\bin\Project.dll.config
 C:\Users\Admin\Desktop\Project\PRN211\Project\bin\Project.dll
 C:\Users\Admin\Desktop\Project\PRN211\Project\bin\Project.pdb

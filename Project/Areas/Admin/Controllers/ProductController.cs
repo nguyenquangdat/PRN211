@@ -9,6 +9,10 @@ using Project.Models;
 using OfficeOpenXml;
 using System.IO;
 
+
+using System.Data;
+
+
 namespace Project.Areas.Admin.Controllers
 {
     //[Authorize(Roles = "ADMIN")]
@@ -19,7 +23,6 @@ namespace Project.Areas.Admin.Controllers
         // GET: Admin/Home
         public ActionResult Index(int? page, string searchBy, string search)
         {
-
 
             // 1. Tham số int? dùng để thể hiện null và kiểu int(số nguyên)
             // page có thể có giá trị là null ( rỗng) và kiểu int.
@@ -48,6 +51,7 @@ namespace Project.Areas.Admin.Controllers
         // Xem chi tiết người dùng GET: Admin/Home/Details/5 
         public ActionResult Details(int id)
         {
+
             return View(sugasContext.Products.Where(s => s.ProductID == id).FirstOrDefault());
         }
 
@@ -68,7 +72,11 @@ namespace Project.Areas.Admin.Controllers
         {
             try
             {
+
                 if (product.ImageUpload != null)
+
+                if(product.ImageUpload!=null)
+
                 {
                     string fileName = Path.GetFileNameWithoutExtension(product.ImageUpload.FileName);
                     string extension = Path.GetExtension(product.ImageUpload.FileName);
@@ -88,6 +96,7 @@ namespace Project.Areas.Admin.Controllers
             {
                 return View();
             }
+
         }
 
         // Sửa sản phẩm GET lấy ra ID sản phẩm: Admin/Home/Edit/5
@@ -105,7 +114,7 @@ namespace Project.Areas.Admin.Controllers
 
         // POST: Admin/Home/Edit/5
         [HttpPost]
-        public ActionResult Edit(Product product)
+        public ActionResult Edit(Product product, int id)
         {
             try
             {
@@ -186,7 +195,7 @@ namespace Project.Areas.Admin.Controllers
             ws.Cells["I5"].Value = "TagID";
 
             int rows = 6;
-            foreach(var item in products)
+            foreach (var item in products)
             {
                 ws.Cells[String.Format("A{0}", rows)].Value = item.ProductID;
                 ws.Cells[String.Format("B{0}", rows)].Value = item.ProductDescription;

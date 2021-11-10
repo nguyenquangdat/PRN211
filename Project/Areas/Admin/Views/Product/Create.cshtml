@@ -8,6 +8,7 @@
 <h2>Create</h2>
 
 @using (Html.BeginForm("Create", "Product", FormMethod.Post, new { enctype = "multipart/form-data" }))
+
 {
     @Html.AntiForgeryToken()
 
@@ -68,6 +69,7 @@
             <div class="col-md-10">
 
                 <img src="@Url.Content(Model.Image)" style="height:200px; width:200px; margin:10px;" id="previewImage" />
+
                 <input type="file" name="ImageUpload" onchange="ShowImagePreview(this, document.getElementById('previewImage'))" />
                 @Html.ValidationMessageFor(model => model.Image, "", new { @class = "text-danger" })
             </div>
