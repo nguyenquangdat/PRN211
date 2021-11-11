@@ -9,29 +9,22 @@ using PagedList;
 
 namespace Project.Controllers
 {
-    
+
     public class ProductController : Controller
     {
         SugasContext sugasContext = new SugasContext();
         // GET: Product
         public ActionResult Index(int? page, string searchBy, string search)
         {
-            // 1. Tham số int? dùng để thể hiện null và kiểu int(số nguyên)
-            // page có thể có giá trị là null ( rỗng) và kiểu int.
 
-            // 2. Nếu page = null thì đặt lại là 1.
             if (page == null) page = 1;
 
-            // 3. Tạo querry sql, lưu ý phải sắp xếp theo trường nào đó, ví dụ OrderBy
-            // theo ProductID mới có thể phân trang.
             var products = sugasContext.Products.OrderBy(x => x.ProductID);
 
-            // 4. Tạo kích thước trang (pageSize) hay là số sản phẩm hiển thị trên 1 trang
-            int pageSize = 4;
+            int pageSize = 8;
 
-            // 4.1 Toán tử ?? trong C# mô tả nếu page khác null thì lấy giá trị page, còn
-            // nếu page = null thì lấy giá trị 1 cho biến pageNumber.
             int pageNumber = (page ?? 1);
+
             if (searchBy == "NameProduct")
             {
                 return View(sugasContext.Products.Where(s => s.ProductName.StartsWith(search)).OrderByDescending(s => s.ProductID).ToPagedList(pageNumber, pageSize));
@@ -43,8 +36,30 @@ namespace Project.Controllers
         public ActionResult GetLastestProduct()
         {
             var product = sugasContext.Products.Where(p => p.IsNewProduct == true)
-                .OrderByDescending(p => p.ProductDate).Take(8).ToList();
+                           .OrderByDescending(p => p.ProductDate).Take(8).ToList();
             return PartialView(product);
+        }
+        public ActionResult GetLastestProductByCategory(int? category, int? page)
+        {
+            if (page == null) page = 1;
+
+            var products = sugasContext.Products.OrderBy(x => x.ProductID);
+
+            int pageSize = 4;
+
+            int pageNumber = (page ?? 1);
+
+            if (category != null)
+            {
+
+                var product = sugasContext.Products.OrderByDescending(x => x.ProductDate).Where(x => x.CategoryID == category).ToPagedList(pageNumber, pageSize);
+                return PartialView(product);
+            }
+            else
+            {
+                var productlist = sugasContext.Products.OrderByDescending(x => x.ProductDate).ToPagedList(pageNumber, pageSize);
+                return PartialView(productlist);
+            }
         }
         public ActionResult Details(int productID = 0)
         {
@@ -55,6 +70,30 @@ namespace Project.Controllers
                 return null;
             }
             return View(detail);
+        }
+        public ActionResult ProductByCategory(int? category, int? page)
+        {
+            if (page == null) page = 1;
+
+            var products = sugasContext.Products.OrderBy(x => x.ProductID);
+
+            int pageSize = 4;
+
+            int pageNumber = (page ?? 1);
+
+            if (category != null)
+            {
+
+                var product = sugasContext.Products.OrderByDescending(x => x.ProductID).Where(x => x.CategoryID == category).ToPagedList(pageNumber, pageSize);
+                return View(product);
+            }
+            else
+            {
+                var productlist = sugasContext.Products.OrderByDescending(x => x.ProductID).ToPagedList(pageNumber, pageSize);
+                return View(productlist);
+            }
+
+
         }
     }
 }

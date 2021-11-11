@@ -1,0 +1,12 @@
+﻿@using Project.Models
+@model List<Categories>
+
+@foreach (var item in Model)
+{
+    <li data-filter="*">
+        @*<a href="#">*@
+    @Html.ActionLink(item.CategoryName, "ProductByCategory", "Product", new { category = item.CategoryID }, null)
+    @*</a>*@
+</li>
+}
+

@@ -4,12 +4,12 @@
     <div class="col-lg-3 col-sm-6 mix all dresses bags">
         <div class="single-product-item">
             <figure>
-                <a href="#">
-                    
+                <a href="@Url.Action("Details", new {@productID=item.ProductID })">
+
                     <img src="@Url.Content("~/ProductImage/" + item.Image)" alt="" />
-                    
+
                 </a>
-                <div class="p-status">new</div>
+                <div class="p-status">New Arrival</div>
             </figure>
             <div class="product-text">
                 <h6>@item.ProductName</h6>

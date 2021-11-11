@@ -379,3 +379,5 @@ C:\Users\Admin\Desktop\Project\PRN211\Project\obj\Debug\Project.csproj.CopyCompl
 C:\Users\Admin\Desktop\Project\PRN211\Project\obj\Debug\Project.dll
 C:\Users\Admin\Desktop\Project\PRN211\Project\obj\Debug\Project.pdb
 C:\Users\Admin\Desktop\Project\PRN211\Project\obj\Debug\Project.csproj.AssemblyReference.cache
+C:\Users\Admin\Desktop\Project\PRN211\Project\obj\Debug\Project.Migrations.Contact.resources
+C:\Users\Admin\Desktop\Project\PRN211\Project\obj\Debug\Project.Migrations.check.resources

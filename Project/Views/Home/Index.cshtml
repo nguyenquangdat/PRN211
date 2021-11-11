@@ -96,10 +96,7 @@
                         <h2>Latest Products</h2>
                     </div>
                     <ul class="product-controls">
-
-                        @*@{
-                            Html.RenderAction("_CategoriesPartial", "Category");
-                        }*@
+                        @Html.Action("GetCategory", "Category")
                     </ul>
                 </div>
             </div>
@@ -108,6 +105,8 @@
         <div class="row" id="product-list">
             @{
                 Html.RenderAction("GetLastestProduct", "Product");
+            
+                
             }
             @*<div class="col-lg-3 col-sm-6 mix all dresses bags">
             <div class="single-product-item">

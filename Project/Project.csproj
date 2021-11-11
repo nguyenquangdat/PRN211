@@ -171,6 +171,14 @@
     <Compile Include="Migrations\202110200508182_UserLogin.Designer.cs">
       <DependentUpon>202110200508182_UserLogin.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202111100817315_contact.cs" />
+    <Compile Include="Migrations\202111100817315_contact.Designer.cs">
+      <DependentUpon>202111100817315_contact.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202111101011482_check.cs" />
+    <Compile Include="Migrations\202111101011482_check.Designer.cs">
+      <DependentUpon>202111101011482_check.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Categories.cs" />
     <Compile Include="Models\Login.cs" />
@@ -544,10 +552,13 @@
     <Content Include="Views\User\Register.cshtml" />
     <Content Include="Views\User\Login.cshtml" />
     <Content Include="Views\Product\GetLastestProduct.cshtml" />
-    <Content Include="Views\Category\_CategoriesPartial.cshtml" />
     <Content Include="Views\Product\Details.cshtml" />
     <Content Include="Views\Product\Index.cshtml" />
     <Content Include="Views\Error\Index.cshtml" />
+    <Content Include="Views\Product\ProductByCategory.cshtml" />
+    <Content Include="Views\Category\GetCategory.cshtml" />
+    <Content Include="Views\Product\GetLastestProductByCategory.cshtml" />
+    <Content Include="Views\Category\GetLatestCategory.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -575,6 +586,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202110200508182_UserLogin.resx">
       <DependentUpon>202110200508182_UserLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202111100817315_contact.resx">
+      <DependentUpon>202111100817315_contact.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202111101011482_check.resx">
+      <DependentUpon>202111101011482_check.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -23,6 +23,7 @@
     <link rel="stylesheet" href="~/Content/css/magnific-popup.css" type="text/css">
     <link rel="stylesheet" href="~/Content/css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="~/Content/css/style.css" type="text/css">
+    <link href="~/Content/PagedList.css" rel="stylesheet" />
 </head>
 
 <body>
@@ -123,9 +124,9 @@
                             </ul>
                         </li>
                         <li>
-                            <a class="active">Category</a><ul class="sub-menu">
-                                <li class="product-controls">
-                                    @{ Html.RenderAction("_CategoriesPartial", "Category"); }
+                            <a class="category-title">Category</a><ul class="sub-menu">
+                                <li class="category-list">
+                                    @Html.Action("GetCategory", "Category")
                                 </li>
 
                             </ul>

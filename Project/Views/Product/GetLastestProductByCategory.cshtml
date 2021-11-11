@@ -1,0 +1,21 @@
+﻿@foreach (var item in Model)
+{
+
+    <div class="col-lg-3 col-sm-6 mix all dresses bags">
+        <div class="single-product-item">
+            <figure>
+                
+
+                    <img src="@Url.Content("~/ProductImage/" + item.Image)" alt="" />
+
+                </a>
+                <div class="p-status">New Arrival</div>
+            </figure>
+            <div class="product-text">
+                <h6>@item.ProductName</h6>
+
+            </div>
+        </div>
+    </div>
+
+}

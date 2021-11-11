@@ -6,22 +6,30 @@
     @foreach (var item in Model)
     {
         <div class="col-md-3 col-sm-6">
-            <a href="@Url.Action("Details", new {@productID=item.ProductID })">
+            <a href="@Url.Action("Details", new { @productID = item.ProductID })">
 
-                
+
                 <img src="@Url.Content("~/ProductImage/" + item.Image)" width="300" height="250" />
-               
+
             </a>
             <center>
                 <h4>@item.ProductName</h4>
                 <h4 style="color:red">Price @item.ProductPrice</h4>
-                <br />
+                <h5>
+                    @{ if (item.Stock > 0)
+                        {<a> Available</a>}
+                       else if (item.Stock == 0) 
+                        {<a>Out of Stock</a> }
+                }
 
-                <input type="submit" value="Buy" id="bgnCart" />
+            </h5>
+            <br />
 
-            </center>
+            <input type="submit" value="Buy" id="bgnCart" />
 
-        </div>}
+        </center>
+
+    </div>}
 
 </div>
 <br />
