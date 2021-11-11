@@ -283,3 +283,7 @@ C:\Users\This MC\OneDrive\Desktop\ProjectPRN211\PRN211\Project\obj\Debug\Project
 C:\Users\This MC\OneDrive\Desktop\ProjectPRN211\PRN211\Project\obj\Debug\Project.Migrations.contact.resources
 C:\Users\This MC\OneDrive\Desktop\ProjectPRN211\PRN211\Project\obj\Debug\Project.csproj.AssemblyReference.cache
 C:\Users\This MC\OneDrive\Desktop\ProjectPRN211\PRN211\Project\obj\Debug\Project.Migrations.fixdate.resources
+C:\Users\This MC\OneDrive\Desktop\ProjectPRN211\PRN211\Project\bin\BCrypt.Net.dll
+C:\Users\This MC\OneDrive\Desktop\ProjectPRN211\PRN211\Project\bin\DevOne.Security.Cryptography.BCrypt.dll
+C:\Users\This MC\OneDrive\Desktop\ProjectPRN211\PRN211\Project\bin\BCrypt.Net.xml
+C:\Users\This MC\OneDrive\Desktop\ProjectPRN211\PRN211\Project\obj\Debug\Project.Migrations.changepassword.resources

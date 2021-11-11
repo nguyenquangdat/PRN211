@@ -32,8 +32,6 @@ namespace Project.Models
         [Display(Name = "Phone Number")]
         public string UserPhone { get; set; }
 
-        [StringLength(10)]
-        [Required(ErrorMessage = "The {0} is required")]
         [Display(Name = "Password")]
         public string UserPassword { get; set; }
 

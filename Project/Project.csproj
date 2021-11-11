@@ -45,6 +45,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="BCrypt.Net, Version=0.1.4141.31969, Culture=neutral, PublicKeyToken=f3bc8f8c31beeb49, processorArchitecture=MSIL">
+      <HintPath>..\packages\BCrypt.Net.0.1.0\lib\net35\BCrypt.Net.dll</HintPath>
+    </Reference>
+    <Reference Include="DevOne.Security.Cryptography.BCrypt, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\BCrypt.1.0.0.0\lib\DevOne.Security.Cryptography.BCrypt.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -180,6 +186,10 @@
     <Compile Include="Migrations\202111101334441_fixdate.Designer.cs">
       <DependentUpon>202111101334441_fixdate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202111110939076_change password.cs" />
+    <Compile Include="Migrations\202111110939076_change password.Designer.cs">
+      <DependentUpon>202111110939076_change password.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Categories.cs" />
     <Compile Include="Models\Contact.cs" />
@@ -190,6 +200,7 @@
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Security\CustomRoleProvider.cs" />
+    <Compile Include="Util\Hasing.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Content\.gitignore" />
@@ -592,6 +603,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202111101334441_fixdate.resx">
       <DependentUpon>202111101334441_fixdate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202111110939076_change password.resx">
+      <DependentUpon>202111110939076_change password.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

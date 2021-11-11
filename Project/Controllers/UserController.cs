@@ -1,5 +1,6 @@
 ﻿using Project.DBcontext;
 using Project.Models;
+using Project.Util;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,15 +25,25 @@ namespace Project.Controllers
         public ActionResult Register(User user)
         {
             try
-            {
-                user.RoleID = 2;
-                // Thêm người dùng  mới
-                sugasContext.Users.Add(user);
-                // Lưu lại vào cơ sở dữ liệu
-               sugasContext.SaveChanges();
+            {              
                 // Nếu dữ liệu đúng thì trả về trang đăng nhập
                 if (ModelState.IsValid)
                 {
+                    var users = sugasContext.Users.ToList();
+                    foreach(User user1 in users)
+                    {
+                        if(user1.UserEmail == user.UserEmail)
+                        {
+                            TempData["Error"] = "account already exists ";
+                            return View();
+                        }
+                    }
+                    user.RoleID = 2;
+                    user.UserPassword = Hasing.HashPassword(user.UserPassword);
+                    // Thêm người dùng  mới
+                    sugasContext.Users.Add(user);
+                    // Lưu lại vào cơ sở dữ liệu
+                    sugasContext.SaveChanges();
                     return RedirectToAction("Login");
                 }
                 return View("Register");
@@ -58,29 +69,38 @@ namespace Project.Controllers
         {
             string userMail = formCollection["userMail"].ToString();
             string userPassword = formCollection["userPassword"].ToString();
-            var isLogin = sugasContext.Users.SingleOrDefault(x => x.UserEmail.Equals(userMail) && x.UserPassword.Equals(userPassword));
-
+            var isLogin = sugasContext.Users.SingleOrDefault(x => x.UserEmail.Equals(userMail));
             if(isLogin != null)
             {
-                if(userMail == "Admin@gmail.com")
+                if (Hasing.validatePassword(userPassword, isLogin.UserPassword))
                 {
-                    FormsAuthentication.SetAuthCookie(userMail, false);
-                    Session["use"] = isLogin;
-                    return RedirectToAction("Index", "Admin/Product");
+                    if (userMail == "Admin@gmail.com")
+                    {
+                        FormsAuthentication.SetAuthCookie(userMail, false);
+                        Session["use"] = isLogin;
+                        return RedirectToAction("Index", "Admin/Product");
+                    }
+                    else
+                    {
+                        FormsAuthentication.SetAuthCookie(userMail, false);
+                        Session["use"] = isLogin;
+                        return RedirectToAction("Index", "Home");
+                    }
                 }
                 else
                 {
-                    FormsAuthentication.SetAuthCookie(userMail, false);
-                    Session["use"] = isLogin;
-                    return RedirectToAction("Index", "Home");
+                    TempData["error"] = "User or Password incorrect";
+                    return View("Login");
+
                 }
             }
             else
             {
-                ViewBag.Fail = "Login Fail";
+                TempData["error"] = "User or Password incorrect";
                 return View("Login");
             }
-        }
+          }
+        
         public ActionResult Logout()
         {
             Session["use"] = null;
@@ -117,7 +137,7 @@ namespace Project.Controllers
                     current_user.UserName = user.UserName;
                     current_user.UserPhone = user.UserPhone;
                     current_user.UserAddress = user.UserAddress;
-                    current_user.UserPassword = user.UserPassword;
+                    current_user.UserPassword = Hasing.HashPassword(user.UserPassword);
                     sugasContext.SaveChanges();
                     return Json(data: "Update Sucessfully", JsonRequestBehavior.AllowGet);
                 }

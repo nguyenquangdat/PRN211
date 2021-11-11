@@ -15,6 +15,10 @@
     <title>Register</title>
 </head>
 <body>
+    @if (TempData["Error"] != null)
+    {
+        <span style="color:red">@TempData["Error"]</span>
+    }
     @using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
@@ -71,7 +75,9 @@
             </div>
         </div>
     }
-
+    <p>
+        @Html.ActionLink("Back to List", "Index", "Home")
+    </p>
 </body>
 </html>
 <style>

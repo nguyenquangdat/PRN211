@@ -6,7 +6,10 @@
 }
 
 
-
+@if(TempData["error"] != null)
+            {
+<span style="color:red">@TempData["error"]</span>
+            }
 @using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
