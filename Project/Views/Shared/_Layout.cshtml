@@ -55,6 +55,7 @@
             }
         });
             });
+ 
         });
     </script>
 </head>
@@ -96,7 +97,7 @@
                 @{ if (u != null)
                     {
         <div class="user-access">
-            Welcome Back : <a style="color:blueviolet">@u.UserName</a>
+            Welcome Back : <a style="color:blueviolet" href="User/Information/@u.UserID">@u.UserName</a>
             <a style="color: lightskyblue" href="/User/Logout"> Logout</a>
 
         </div> }

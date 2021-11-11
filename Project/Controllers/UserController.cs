@@ -87,5 +87,44 @@ namespace Project.Controllers
             return RedirectToAction("Index", "Home");
 
         }
+
+        public ActionResult Information(int id)
+        {
+            var user = sugasContext.Users.Where(x => x.UserID == id).FirstOrDefault();
+            return View(user);
+        }
+
+        [HttpPost]
+        public ActionResult Information(User user)
+        {
+            var current_user = sugasContext.Users.Where(x => x.UserID == user.UserID).FirstOrDefault();
+            if (user.UserPassword == null)
+            {
+                current_user.UserName = user.UserName;
+                current_user.UserPhone = user.UserPhone;
+                current_user.UserAddress = user.UserAddress;
+                sugasContext.SaveChanges();
+                return Json(data: "Update Sucessfully",JsonRequestBehavior.AllowGet);
+            }
+            else if (user.UserPassword != null)
+            {
+                if(user.UserPassword != user.ComformPassword)
+                {
+                    return Json(data: "Password are not the same ", JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    current_user.UserName = user.UserName;
+                    current_user.UserPhone = user.UserPhone;
+                    current_user.UserAddress = user.UserAddress;
+                    current_user.UserPassword = user.UserPassword;
+                    sugasContext.SaveChanges();
+                    return Json(data: "Update Sucessfully", JsonRequestBehavior.AllowGet);
+                }
+            }
+            return Json(data: "Update Sucessfully", JsonRequestBehavior.AllowGet);
+
+        }
+
     }
 }

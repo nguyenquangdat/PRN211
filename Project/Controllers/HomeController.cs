@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Helpers;
 using System.Web.Mvc;
 
 namespace Project.Controllers
@@ -43,6 +44,10 @@ namespace Project.Controllers
             c.CreateDate = DateTime.Now;
             sc.Contacts.Add(c);
             sc.SaveChanges();
+
+            String subject = "Have Message's contact";
+            String body = $"You can click link to contact manage \n https://localhost:44352/Admin/Contacts" ;
+            WebMail.Send("nguyenquangdat199999@gmail.com", subject, body, null, null, null, true, null, null, null, null, null);
             return Json(data:"Send Message Sucessfuly",JsonRequestBehavior.AllowGet);
         }
     }

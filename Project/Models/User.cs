@@ -46,5 +46,8 @@ namespace Project.Models
         //public virtual ICollection<Order> Order { get; set; }
 
         public virtual Roles Roles { get; set; }
+
+        [NotMapped]
+        public String ComformPassword { get; set; }
     }
 }
