@@ -8,10 +8,22 @@
 
 <h2>Product Manager</h2>
 
-<p>
+
     <button class="btn-default">@Html.ActionLink("Create", "Create")</button>
     <a href="@Url.Action("ExportToExcel", "Product")"> Export Excel</a>
-</p>
+
+<div style="text-align:center">
+    @using (Html.BeginForm("Index", "Product"))
+    {
+        <b>
+            Search by:
+        </b>
+        @Html.RadioButton("searchBy", "NameProduct") <text>Name Product</text>
+
+        @Html.RadioButton("searchBy", "None", true)<text>None</text>
+        @Html.TextBox("search")<input type="submit" value="Search" />
+    }
+</div>
 <table class="table table-bordered">
     <tr>
 
@@ -71,16 +83,9 @@
             </td>
             <td>
 
-                @if (item.TagID == 1)
-                {<img src="@Url.Content("~/ProductImage/Adidas/" + item.Image)" width="50" height="50" />}
-                @if (item.TagID == 2)
-                {<img src="@Url.Content("~/ProductImage/Nike/" + item.Image)" width="50" height="50" />}
-                @if (item.TagID == 3)
-                {<img src="@Url.Content("~/ProductImage/Lacoste/" + item.Image)" width="50" height="50" />}
-                @if (item.TagID == 4)
-                {<img src="@Url.Content("~/ProductImage/MLB/" + item.Image)" width="50" height="50" />}
-                @if (item.TagID == 5)
-                {<img src="@Url.Content("~/ProductImage/Kenzo/" + item.Image)" width="50" height="50" />}
+
+                <img src="~/ProductImage/@item.Image" width="50" height="50" />
+
 
             </td>
             <td>
@@ -94,9 +99,7 @@
                 {<p style="color:coral">New Arrival</p>}
 
             <td>
-                @*@Html.ActionLink("Edit", "Edit", new { id = item.ProductID })|
-                    @Html.ActionLink("Details", "Details", new { id = item.ProductID }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.ProductID })*@
+
                 <form action="/Admin/Product/Delete/@item.ProductID" method="post">
                     @Html.AntiForgeryToken()
                     <a href="/Admin/Product/Edit/@item.ProductID">

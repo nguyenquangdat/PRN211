@@ -3,7 +3,7 @@ namespace Project.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class changepassword : DbMigration
+    public partial class changePassword : DbMigration
     {
         public override void Up()
         {

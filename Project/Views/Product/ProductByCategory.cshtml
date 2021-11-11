@@ -1,0 +1,35 @@
+﻿
+@model PagedList.IPagedList<Project.Models.Product>
+@using PagedList.Mvc;
+<div class="row">
+
+    @foreach (var item in Model)
+    {
+        <div class="col-md-3 col-sm-6">
+            <a href="@Url.Action("Details", new {@productID=item.ProductID })">
+
+
+                <img src="@Url.Content("~/ProductImage/" + item.Image)" width="200" height="250" />
+
+            </a>
+            <center>
+                <h4>@item.ProductName</h4>
+                <h4 style="color:red">Price @item.ProductPrice</h4>
+                <br />
+
+                <input type="submit" value="Buy" id="bgnCart" />
+
+            </center>
+
+        </div>}
+
+</div>
+<br />
+
+    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
+
+    @Html.PagedListPager(Model, page => Url.Action("Index",
+        new { page = page }))
+
+
+

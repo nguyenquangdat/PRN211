@@ -6,29 +6,30 @@
     @foreach (var item in Model)
     {
         <div class="col-md-3 col-sm-6">
-            <a href="@Url.Action("Details", new {@productID=item.ProductID })">
+            <a href="@Url.Action("Details", new { @productID = item.ProductID })">
 
-                @if (item.TagID == 1)
-                {<img src="@Url.Content("~/ProductImage/Adidas/" + item.Image)" width="300" height="250" />}
-                @if (item.TagID == 2)
-                {<img src="@Url.Content("~/ProductImage/Nike/" + item.Image)" width="300" height="250" />}
-                @if (item.TagID == 3)
-                {<img src="@Url.Content("~/ProductImage/Lacoste/" + item.Image)" width="300" height="250" />}
-                @if (item.TagID == 4)
-                {<img src="@Url.Content("~/ProductImage/MLB/" + item.Image)" width="300" height="250" />}
-                @if (item.TagID == 5)
-                {<img src="@Url.Content("~/ProductImage/Kenzo/" + item.Image)" width="300" height="250" />}
+
+                <img src="@Url.Content("~/ProductImage/" + item.Image)" width="300" height="250" />
+
             </a>
             <center>
                 <h4>@item.ProductName</h4>
                 <h4 style="color:red">Price @item.ProductPrice</h4>
-                <br />
+                <h5>
+                    @{ if (item.Stock > 0)
+                        {<a> Available</a>}
+                       else if (item.Stock == 0) 
+                        {<a>Out of Stock</a> }
+                }
 
-                <input type="submit" value="Buy" id="bgnCart" />
+            </h5>
+            <br />
 
-            </center>
+            <input type="submit" value="Buy" id="bgnCart" />
 
-        </div>}
+        </center>
+
+    </div>}
 
 </div>
 <br />

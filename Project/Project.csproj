@@ -186,9 +186,9 @@
     <Compile Include="Migrations\202111101334441_fixdate.Designer.cs">
       <DependentUpon>202111101334441_fixdate.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202111110939076_change password.cs" />
-    <Compile Include="Migrations\202111110939076_change password.Designer.cs">
-      <DependentUpon>202111110939076_change password.cs</DependentUpon>
+    <Compile Include="Migrations\202111111558443_changePassword.cs" />
+    <Compile Include="Migrations\202111111558443_changePassword.Designer.cs">
+      <DependentUpon>202111111558443_changePassword.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Categories.cs" />
@@ -232,6 +232,7 @@
     <Content Include="Areas\Content\scripts\render-scripts.js" />
     <Content Include="Areas\Content\scripts\render-scss.js" />
     <Content Include="Areas\Content\scripts\sb-watch.js" />
+    <Content Include="Areas\Content\scripts\scripts.js" />
     <Content Include="Areas\Content\scripts\start-debug.js" />
     <Content Include="Areas\Content\scripts\start.js" />
     <Content Include="Areas\Content\src\assets\demo\chart-area-demo.js" />
@@ -356,22 +357,23 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="ProductImage\Adidas\AdidasSandal1.jpg" />
-    <Content Include="ProductImage\Adidas\AdidasSandal2.jpg" />
-    <Content Include="ProductImage\Adidas\AdidasSandal3.jpg" />
-    <Content Include="ProductImage\Adidas\AdidasSandal4.jpg" />
-    <Content Include="ProductImage\Adidas\AdidasSandal5.jpg" />
-    <Content Include="ProductImage\Adidas\Adidasshoes1.jpg" />
-    <Content Include="ProductImage\Kenzo\PansKenzo1.jpg" />
-    <Content Include="ProductImage\Kenzo\PansKenzo2.jpg" />
-    <Content Include="ProductImage\Kenzo\PansKenzo3.jpg" />
-    <Content Include="ProductImage\Lacoste\Lacoste1.jpg" />
-    <Content Include="ProductImage\MLB\MLBShirt1.jpg" />
-    <Content Include="ProductImage\MLB\MLBShirt2.jpg" />
-    <Content Include="ProductImage\MLB\MLBShirt3.jpg" />
-    <Content Include="ProductImage\MLB\MLBShirt4.jpg" />
-    <Content Include="ProductImage\Nike\Nikeshoe1.jpg" />
-    <Content Include="ProductImage\Nike\Nikeshoe2.jpg" />
+    <Content Include="ProductImage\Add.png" />
+    <Content Include="ProductImage\AdidasSandal1.jpg" />
+    <Content Include="ProductImage\AdidasSandal2.jpg" />
+    <Content Include="ProductImage\AdidasSandal3.jpg" />
+    <Content Include="ProductImage\AdidasSandal4.jpg" />
+    <Content Include="ProductImage\AdidasSandal5.jpg" />
+    <Content Include="ProductImage\Adidasshoes1.jpg" />
+    <Content Include="ProductImage\Lacoste1.jpg" />
+    <Content Include="ProductImage\MLBShirt1.jpg" />
+    <Content Include="ProductImage\MLBShirt2.jpg" />
+    <Content Include="ProductImage\MLBShirt3.jpg" />
+    <Content Include="ProductImage\MLBShirt4.jpg" />
+    <Content Include="ProductImage\Nikeshoe1.jpg" />
+    <Content Include="ProductImage\Nikeshoe2.jpg" />
+    <Content Include="ProductImage\PansKenzo1.jpg" />
+    <Content Include="ProductImage\PansKenzo2.jpg" />
+    <Content Include="ProductImage\PansKenzo3.jpg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Content\fonts\fontawesome-webfont.eot" />
@@ -444,9 +446,6 @@
     <Content Include="Areas\Admin\Views\Categories\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Categories\Delete.cshtml" />
     <Content Include="Areas\Admin\Views\Categories\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\Product\Details.cshtml" />
-    <Content Include="Areas\Admin\Views\Product\Create.cshtml" />
-    <Content Include="Areas\Admin\Views\Product\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Product\Delete.cshtml" />
     <Content Include="Areas\Admin\Views\Tags\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Tags\Create.cshtml" />
@@ -456,7 +455,6 @@
     <Content Include="Areas\Admin\Views\Users\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Users\Details.cshtml" />
     <Content Include="Areas\Admin\Views\Users\Edit.cshtml" />
-    <Content Include="Areas\Admin\Views\Users\Delete.cshtml" />
     <Content Include="Areas\Admin\Views\Roles\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Roles\Details.cshtml" />
     <Content Include="Areas\Admin\Views\Roles\Create.cshtml" />
@@ -537,6 +535,10 @@
     <Content Include="Content\Login\vendor\bootstrap\css\bootstrap.min.css.map" />
     <Content Include="Areas\Admin\Views\Contacts\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Contacts\Detail.cshtml" />
+    <Content Include="Areas\Admin\Views\Users\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Product\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Product\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Product\Edit.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -565,11 +567,14 @@
     <Content Include="Views\User\Register.cshtml" />
     <Content Include="Views\User\Login.cshtml" />
     <Content Include="Views\Product\GetLastestProduct.cshtml" />
-    <Content Include="Views\Category\_CategoriesPartial.cshtml" />
     <Content Include="Views\Product\Details.cshtml" />
     <Content Include="Views\Product\Index.cshtml" />
     <Content Include="Views\Error\Index.cshtml" />
     <Content Include="Views\User\Information.cshtml" />
+    <Content Include="Views\Product\ProductByCategory.cshtml" />
+    <Content Include="Views\Category\GetCategory.cshtml" />
+    <Content Include="Views\Product\GetLastestProductByCategory.cshtml" />
+    <Content Include="Views\Category\GetLatestCategory.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -604,8 +609,8 @@
     <EmbeddedResource Include="Migrations\202111101334441_fixdate.resx">
       <DependentUpon>202111101334441_fixdate.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202111110939076_change password.resx">
-      <DependentUpon>202111110939076_change password.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202111111558443_changePassword.resx">
+      <DependentUpon>202111111558443_changePassword.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

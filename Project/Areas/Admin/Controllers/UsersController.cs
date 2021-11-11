@@ -93,8 +93,6 @@ namespace Project.Areas.Admin.Controllers
             return View(user);
         }
 
-        //Return user and save Data
-        // POST: Admin/Users/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
@@ -104,6 +102,7 @@ namespace Project.Areas.Admin.Controllers
             sugasContext.SaveChanges();
             return RedirectToAction("Index");
         }
+
 
         protected override void Dispose(bool disposing)
         {
@@ -137,7 +136,7 @@ namespace Project.Areas.Admin.Controllers
             ws.Cells["D5"].Value = "UserPhone";
             ws.Cells["E5"].Value = "RoleID";
             ws.Cells["F5"].Value = "UserAddress";
-           
+
 
             int rows = 6;
             foreach (var item in users)
