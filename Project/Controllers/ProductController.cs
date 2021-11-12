@@ -38,7 +38,7 @@ namespace Project.Controllers
         public ActionResult GetLastestProduct()
         {
             var product = sugasContext.Products.Where(p => p.IsNewProduct == true)
-                .OrderByDescending(p => p.ProductDate).Take(8).ToList();
+                .OrderByDescending(p => p.ProductDate).Take(12).ToList();
             return PartialView(product);
         }
         public ActionResult Details(int productID = 0)

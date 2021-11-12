@@ -1,30 +1,65 @@
 ﻿
 @model PagedList.IPagedList<Project.Models.Product>
 @using PagedList.Mvc;
-<div class="row">
+<style>
+    .container{
+        margin:0 auto;
+        margin-top:30px;
+        
+    }
+    .page{
+        margin-left:920px;
+        margin-bottom:30px;
+    }
+    h4 {
+        font-size:19px;
+    }
+    .btn input{
+        width:200px;
+        height:50px;
+        background-color:brown;
+        color:white;
+        margin-top:40px;
+        font-weight:bold;
+        border:none;
+        border-radius:10px;
+    }
+    .btn input:hover{
+        cursor:pointer;
+    }
+</style>
+<div class="row container">
 
     @foreach (var item in Model)
     {
-        <div class="col-md-3 col-sm-6">
+        <div class="col-md-3 ">
             <a href="@Url.Action("Details", new {@productID=item.ProductID })">
 
                 @if (item.TagID == 1)
-                {<img src="@Url.Content("~/ProductImage/Adidas/" + item.Image)" width="300" height="250" />}
+                {<img src="@Url.Content("~/ProductImage/Adidas/" + item.Image)"  />}
                 @if (item.TagID == 2)
-                {<img src="@Url.Content("~/ProductImage/Nike/" + item.Image)" width="300" height="250" />}
+                {<img src="@Url.Content("~/ProductImage/Nike/" + item.Image)"  />}
                 @if (item.TagID == 3)
-                {<img src="@Url.Content("~/ProductImage/Lacoste/" + item.Image)" width="300" height="250" />}
+                {<img src="@Url.Content("~/ProductImage/Lacoste/" + item.Image)" />}
                 @if (item.TagID == 4)
-                {<img src="@Url.Content("~/ProductImage/MLB/" + item.Image)" width="300" height="250" />}
+                {<img src="@Url.Content("~/ProductImage/MLB/" + item.Image)"  />}
                 @if (item.TagID == 5)
-                {<img src="@Url.Content("~/ProductImage/Kenzo/" + item.Image)" width="300" height="250" />}
+                {<img src="@Url.Content("~/ProductImage/Kenzo/" + item.Image)"  />}
             </a>
             <center>
+                <div class="product-name mt-2">
                 <h4>@item.ProductName</h4>
-                <h4 style="color:red">Price @item.ProductPrice</h4>
-                <br />
+                </div>
+                <div class="product-price mt-3">
 
-                <input type="submit" value="Buy" id="bgnCart" />
+                    <h4 style="color:red">Price @item.ProductPrice</h4>
+                </div>
+                
+                
+                <div class="btn mb-3">
+                    <input type="submit" value="Buy" id="bgnCart" />
+                </div>
+                
 
             </center>
 
@@ -32,10 +67,13 @@
 
 </div>
 <br />
-
+<div class="page">
     Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
 
     @Html.PagedListPager(Model, page => Url.Action("Index",
         new { page }))
+</div>
+    
+
 
 

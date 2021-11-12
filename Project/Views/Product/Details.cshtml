@@ -5,28 +5,44 @@
 @{ ViewBag.Title = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml"; }
 <br />
-
+<style>
+    .product-detail{
+        margin-top:90px;
+        text-align:left;
+        
+       
+    }
+</style>
 <CENTER>
-    <div>
-        <h2>What are our products?</h2>
-        @if (Model.TagID == 1)
-        {<img src="@Url.Content("~/ProductImage/Adidas/" + Model.Image)" alt="" />}
-        @if (Model.TagID == 2)
-        {<img src="@Url.Content("~/ProductImage/Nike/" + Model.Image)" alt="" />}
-        @if (Model.TagID == 3)
-        {<img src="@Url.Content("~/ProductImage/Lacoste/" + Model.Image)" alt="" />}
-        @if (Model.TagID == 4)
-        {<img src="@Url.Content("~/ProductImage/MLB/" + Model.Image)" alt="" />}
-        @if (Model.TagID == 5)
-        {<img src="@Url.Content("~/ProductImage/Kenzo/" + Model.Image)" alt="" />}
-        <br />
-        <h3> @Model.ProductName</h3>
-        <h3 style="color:red">Price: @Model.ProductPrice</h3>
-        <br />
-        @Model.ProductDescription
-        <br />
+    <div class="container row">
+        <div class="col">
+            <h2 class="mb-5">What are our products?</h2>
+            <div class="img-product mb-5">
+                @if (Model.TagID == 1)
+                {<img src="@Url.Content("~/ProductImage/Adidas/" + Model.Image)" alt="" />}
+                @if (Model.TagID == 2)
+                {<img src="@Url.Content("~/ProductImage/Nike/" + Model.Image)" alt="" />}
+                @if (Model.TagID == 3)
+                {<img src="@Url.Content("~/ProductImage/Lacoste/" + Model.Image)" alt="" />}
+                @if (Model.TagID == 4)
+                {<img src="@Url.Content("~/ProductImage/MLB/" + Model.Image)" alt="" />}
+                @if (Model.TagID == 5)
+                {<img src="@Url.Content("~/ProductImage/Kenzo/" + Model.Image)" alt="" />}
+            </div>
+        </div>
+        <div class="col product-detail">
+            <h3> @Model.ProductName</h3>
+            <h3 style="color:red" class="mt-2">Price: @Model.ProductPrice</h3>
+            <br />
+            @Model.ProductDescription
+            <br />
 
-        <input type="submit" value="Buy" id="bgnCart" />
+            <input type="submit" class="btn btn-danger mt-3" value="Buy" id="bgnCart" />
+        </div>
+
+        
+        
+        
 
     </div>
 </CENTER>
