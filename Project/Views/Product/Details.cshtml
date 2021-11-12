@@ -7,6 +7,7 @@
 <br />
 
 <CENTER>
+    
     <div>
         <h2>What are our products?</h2>
         @if (Model.TagID == 1)
@@ -25,8 +26,8 @@
         <br />
         @Model.ProductDescription
         <br />
-
-        <input type="submit" value="Buy" id="bgnCart" />
+        @Html.ActionLink("Add To Cart", "addToCart",new { productID = Model.ProductID})
+         
 
     </div>
 </CENTER>

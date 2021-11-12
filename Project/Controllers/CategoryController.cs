@@ -7,7 +7,6 @@ using System.Web.Mvc;
 
 namespace Project.Controllers
 {
-    
     public class CategoryController : Controller
     {
         SugasContext sugasContext = new SugasContext();

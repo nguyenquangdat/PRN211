@@ -146,13 +146,11 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\CategoriesController.cs" />
-    <Compile Include="Areas\Admin\Controllers\ContactsController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProductController.cs" />
     <Compile Include="Areas\Admin\Controllers\RolesController.cs" />
     <Compile Include="Areas\Admin\Controllers\TagsController.cs" />
     <Compile Include="Areas\Admin\Controllers\UsersController.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
-    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\UserController.cs" />
@@ -172,24 +170,32 @@
     <Compile Include="Migrations\202110200508182_UserLogin.Designer.cs">
       <DependentUpon>202110200508182_UserLogin.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202111101253518_contact.cs" />
-    <Compile Include="Migrations\202111101253518_contact.Designer.cs">
-      <DependentUpon>202111101253518_contact.cs</DependentUpon>
+    <Compile Include="Migrations\202111101039351_add.cs" />
+    <Compile Include="Migrations\202111101039351_add.Designer.cs">
+      <DependentUpon>202111101039351_add.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202111101334441_fixdate.cs" />
-    <Compile Include="Migrations\202111101334441_fixdate.Designer.cs">
-      <DependentUpon>202111101334441_fixdate.cs</DependentUpon>
+    <Compile Include="Migrations\202111101411145_Order.cs" />
+    <Compile Include="Migrations\202111101411145_Order.Designer.cs">
+      <DependentUpon>202111101411145_Order.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202111101421060_Orders.cs" />
+    <Compile Include="Migrations\202111101421060_Orders.Designer.cs">
+      <DependentUpon>202111101421060_Orders.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202111120257327_Orders1.cs" />
+    <Compile Include="Migrations\202111120257327_Orders1.Designer.cs">
+      <DependentUpon>202111120257327_Orders1.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Cart.cs" />
     <Compile Include="Models\Categories.cs" />
-    <Compile Include="Models\Contact.cs" />
     <Compile Include="Models\Login.cs" />
+    <Compile Include="Models\Order.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\Roles.cs" />
     <Compile Include="Models\Tags.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Security\CustomRoleProvider.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Content\.gitignore" />
@@ -524,8 +530,6 @@
     <Content Include="Content\Login\vendor\bootstrap\css\bootstrap-reboot.min.css.map" />
     <Content Include="Content\Login\vendor\bootstrap\css\bootstrap.css.map" />
     <Content Include="Content\Login\vendor\bootstrap\css\bootstrap.min.css.map" />
-    <Content Include="Areas\Admin\Views\Contacts\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\Contacts\Detail.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -557,7 +561,7 @@
     <Content Include="Views\Category\_CategoriesPartial.cshtml" />
     <Content Include="Views\Product\Details.cshtml" />
     <Content Include="Views\Product\Index.cshtml" />
-    <Content Include="Views\Error\Index.cshtml" />
+    <Content Include="Views\User\Orders.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -586,11 +590,17 @@
     <EmbeddedResource Include="Migrations\202110200508182_UserLogin.resx">
       <DependentUpon>202110200508182_UserLogin.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202111101253518_contact.resx">
-      <DependentUpon>202111101253518_contact.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202111101039351_add.resx">
+      <DependentUpon>202111101039351_add.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202111101334441_fixdate.resx">
-      <DependentUpon>202111101334441_fixdate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202111101411145_Order.resx">
+      <DependentUpon>202111101411145_Order.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202111101421060_Orders.resx">
+      <DependentUpon>202111101421060_Orders.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202111120257327_Orders1.resx">
+      <DependentUpon>202111120257327_Orders1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

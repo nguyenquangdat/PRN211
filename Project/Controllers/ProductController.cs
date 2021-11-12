@@ -9,7 +9,6 @@ using PagedList;
 
 namespace Project.Controllers
 {
-    
     public class ProductController : Controller
     {
         SugasContext sugasContext = new SugasContext();
@@ -52,5 +51,122 @@ namespace Project.Controllers
             }
             return View(detail);
         }
+
+       Dictionary<Product, int> cart = null;
+        public ActionResult addToCart(int productID)
+        {
+            // lấy sản phẩm từ web
+            var detail = sugasContext.Products.SingleOrDefault(n => n.ProductID == productID);
+            if (detail == null)
+            {
+                Response.StatusCode = 404;
+                return null;
+            }
+            else
+            {
+                cart = (Dictionary<Product, int>)Session["Cart"];
+                if (cart == null)
+                {
+                    cart = new Dictionary<Product, int>();
+                    cart.Add(detail, 1);
+                }
+                else
+                { //nếu sản phẩm có trong kho thì add to cart
+                    for (int index = 0; index < cart.Count; index++)
+                    {
+                        var item =  cart.ElementAt(index);
+                        var itemKey = item.Key;
+                        var itemValue = item.Value;
+                        if(itemKey.ProductID == productID)
+                        {
+                            cart[itemKey]++;
+                            return RedirectToAction("Index");
+                        }
+                    }
+                     
+                    cart.Add(detail, 1);
+                }
+
+            }
+            Session.Add("Cart", cart);
+            return RedirectToAction("Index");
+            //
+        }
+
+        public ActionResult removeFromCart(int productID)
+        {
+            // lấy sản phẩm từ web
+            var detail = sugasContext.Products.SingleOrDefault(n => n.ProductID == productID);
+            if (detail == null)
+            {
+                Response.StatusCode = 404;
+                return null;
+            }
+            else
+            {
+                cart = (Dictionary<Product, int>)Session["Cart"];
+                if (cart != null)
+                {
+                    for (int index = 0; index < cart.Count; index++)
+                    {
+                        var item = cart.ElementAt(index);
+                        var itemKey = item.Key;
+                        var itemValue = item.Value;
+                        if (itemKey.ProductID == productID)
+                        {
+                            cart.Remove(item.Key);                            
+                        }
+                    }                    
+                }               
+            }
+            Session.Add("Cart", cart);
+            return RedirectToAction("Index");
+            //
+        }
+
+
+        public ActionResult checkOut()
+        {
+            User u = (User)Session["use"];
+            if(u != null )
+            {
+                var cart = (Dictionary<Product, int>)Session["Cart"];
+                if(cart != null)
+                {
+
+                
+                for (int index = 0; index < cart.Count; index++)
+                {
+                    var item = cart.ElementAt(index);
+                    var itemKey = item.Key;
+                    var itemValue = item.Value;
+                    Order o = new Order();
+                    o.pid = itemKey.ProductID;
+                    o.price = itemKey.ProductPrice;
+                    o.quantity = itemValue;
+                    o.time = DateTime.Now;
+                    o.uid = u.UserID;
+                    o.total =  itemValue * (int)itemKey.ProductPrice;
+                    o.status = "Pending";
+                    sugasContext.Orders.Add(o);
+                    sugasContext.SaveChanges();
+                    }
+                    
+                    Session.Remove("Cart");
+                return RedirectToAction("Index");
+                }
+                else
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+            }
+            else
+            {
+                return RedirectToAction("Login", "User");
+            }             
+        }
+
+
+         
     }
 }

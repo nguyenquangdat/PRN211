@@ -5,14 +5,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using System.Web.Security;
 
 namespace Project.Controllers
 {
     public class UserController : Controller
     {
         SugasContext sugasContext = new SugasContext();
-        // GET: Register User Views
+        // GET: Register User View
         public ActionResult Register()
         {
             return View();
@@ -25,7 +24,6 @@ namespace Project.Controllers
         {
             try
             {
-                user.RoleID = 2;
                 // Thêm người dùng  mới
                 sugasContext.Users.Add(user);
                 // Lưu lại vào cơ sở dữ liệu
@@ -50,9 +48,38 @@ namespace Project.Controllers
             return View();
 
         }
+        public ActionResult Orders()
+        {
+            User u = (User)Session["use"];
+            if (u != null)
+            {
+                
+                var list = (from p in sugasContext.Products.ToList()
+                           join o in sugasContext.Orders.ToList()
+                           on p.ProductID equals o.pid
+                           where o.uid == u.UserID
+                           select new Order
+                           {
+                                
+                               productname = p.ProductName,
+                               price = p.ProductPrice,
+                               quantity = o.quantity,
+                               total = o.total,
+                               status = o.status,
+                               time = o.time
+                           }).ToList();
+                
+                return View(list);
+            }
+            else
+            {
+                return RedirectToAction("Login", "User");
+            }
+            
 
+        }
 
-       [HttpPost]
+        [HttpPost]
 
        public ActionResult Login(FormCollection formCollection)
         {
@@ -64,13 +91,11 @@ namespace Project.Controllers
             {
                 if(userMail == "Admin@gmail.com")
                 {
-                    FormsAuthentication.SetAuthCookie(userMail, false);
                     Session["use"] = isLogin;
                     return RedirectToAction("Index", "Admin/Product");
                 }
                 else
                 {
-                    FormsAuthentication.SetAuthCookie(userMail, false);
                     Session["use"] = isLogin;
                     return RedirectToAction("Index", "Home");
                 }
