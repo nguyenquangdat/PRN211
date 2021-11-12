@@ -14,7 +14,7 @@
     <link href="https://fonts.googleapis.com/css?family=Amatic+SC:400,700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700,800,900&display=swap"
           rel="stylesheet">
-    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+
     <!-- Css Styles -->
     <link rel="stylesheet" href="~/Content/css/bootstrap.min.css" type="text/css">
     <link rel="stylesheet" href="~/Content/css/font-awesome.min.css" type="text/css">
@@ -61,6 +61,7 @@
 
     <link href="~/Content/PagedList.css" rel="stylesheet" />
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -128,10 +129,93 @@
                 <div class="header-right">
                     <img src="~/Content/img/icons/search.png" alt="" class="search-trigger">
                     <img src="~/Content/img/icons/man.png" alt="">
-                    <a href="#">
-                        <img src="~/Content/img/icons/bag.png" alt="">
-                        <span>2</span>
-                    </a>
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        <a href="#">
+                            <img src="~/Content/img/icons/bag.png" alt="">
+                            @{ var cart = (Dictionary<Product, int>)Session["Cart"];
+                                int num = 0;
+                                if (cart != null)
+                                {
+                                    num = cart.Count;
+                                }
+
+                                <span>@num</span>
+                            }
+
+
+                        </a>
+                    </button>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Your Cart</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">x</button>
+                                </div>
+                                <div class="modal-body">
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Image</th>
+                                                <th scope="col">Information</th>
+                                                <th scope="col">Quantity</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @{ if (cart != null)
+                                                {
+                                                    for (int index = 0; index < cart.Count; index++)
+                                                    {
+                                                        var item = cart.ElementAt(index);
+                                                        var itemKey = item.Key;
+                                                        var itemValue = item.Value;
+                                                                                        <tr>
+                                                                                            <td scope="row">
+                                                                                                <a href="@Url.Action("Details", new {@productID=itemKey .ProductID })">
+                                                                                                    @if (itemKey.TagID == 1)
+                                                                                                    {<img src="@Url.Content("~/ProductImage/Adidas/" + itemKey.Image)" width="300" height="250" />}
+                                                                                                    @if (itemKey.TagID == 2)
+                                                                                                    {<img src="@Url.Content("~/ProductImage/Nike/" + itemKey.Image)" width="300" height="250" />}
+                                                                                                    @if (itemKey.TagID == 3)
+                                                                                                    {<img src="@Url.Content("~/ProductImage/Lacoste/" + itemKey.Image)" width="300" height="250" />}
+                                                                                                    @if (itemKey.TagID == 4)
+                                                                                                    {<img src="@Url.Content("~/ProductImage/MLB/" + itemKey.Image)" width="300" height="250" />}
+                                                                                                    @if (itemKey.TagID == 5)
+                                                                                                    {<img src="@Url.Content("~/ProductImage/Kenzo/" + itemKey.Image)" width="300" height="250" />}
+                                                                                                </a>
+                                                                                            </td>
+                                                                                            <td scope="row">
+                                                                                                <center>
+                                                                                                    <h4>@itemKey.ProductName</h4>
+                                                                                                    <h4 style="color:red">Price @itemKey.ProductPrice</h4>
+                                                                                                    <br />
+                                                                                                    @Html.ActionLink("Remove From Cart", "removeFromCart","Product", new { productID = itemKey.ProductID },null)
+                                                                                                </center>
+                                                                                            </td>
+                                                                                             
+                                                                                            <td scope="row">
+                                                                                                <center>
+                                                                                                    @itemValue
+                                                                                                </center>
+                                                                                            </td>
+                                                                                        </tr>
+                                                    }
+                                                }
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="modal-footer">
+                                     
+                                    <button type="button" class="btn btn-primary"> @Html.ActionLink("Check Out", "checkOut", "Product", null, null)</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
                 @{ if (u != null)
                     {
@@ -139,14 +223,14 @@
             Welcome Back : <a style="color:blueviolet" href="User/Information/@u.UserID">@u.UserName</a>
             <a style="color: lightskyblue" href="/User/Logout"> Logout</a>
 
-        </div> }
-    else
-    {
-<div class="user-access">
-    <a href="/User/Register">Register</a>
+                        </div> }
+                    else
+                    {
+                        <div class="user-access">
+                            <a href="/User/Register">Register</a>
 
-    <a href="/User/Login" class="in">Sign in</a>
-</div> } }
+                            <a href="/User/Login" class="in">Sign in</a>
+                        </div> } }
 
 
                 <nav class="main-menu mobile-menu">
@@ -157,7 +241,7 @@
                             <ul class="sub-menu">
                                 <li><a href="product-page.html">@Html.ActionLink("Product Page", "Index", "Product")</a></li>
                                 <li><a href="shopping-cart.html">Shopping Card</a></li>
-                                <li><a href="check-out.html">Check out</a></li>
+                                <li><a href="check-out.html">@Html.ActionLink("Orders Page", "Orders", "User")</a></li>
                             </ul>
                         </li>
                         <li>
@@ -337,6 +421,7 @@
     </footer>
     <!-- Footer Section End -->
     <!-- Js Plugins -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <script src="~/Content/js/jquery-3.3.1.min.js"></script>
     <script src="~/Content/js/bootstrap.min.js"></script>
     <script src="~/Content/js/jquery.magnific-popup.min.js"></script>

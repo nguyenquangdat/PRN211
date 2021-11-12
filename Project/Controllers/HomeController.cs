@@ -1,6 +1,4 @@
-﻿using Project.DBcontext;
-using Project.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -29,6 +27,7 @@ namespace Project.Controllers
 
             return View();
         }
+<<<<<<< HEAD
 
         [HttpPost]
        public ActionResult AddContact(Contact contact)
@@ -50,5 +49,7 @@ namespace Project.Controllers
             WebMail.Send("nguyenquangdat199999@gmail.com", subject, body, null, null, null, true, null, null, null, null, null);
             return Json(data:"Send Message Sucessfuly",JsonRequestBehavior.AllowGet);
         }
+=======
+>>>>>>> 748b74f38e37538eab6b26b071cbcb655728040f
     }
 }

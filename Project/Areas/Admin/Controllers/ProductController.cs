@@ -15,7 +15,6 @@ using System.Data;
 
 namespace Project.Areas.Admin.Controllers
 {
-    //[Authorize(Roles = "ADMIN")]
     public class ProductController : Controller
     {
         SugasContext sugasContext = new SugasContext();

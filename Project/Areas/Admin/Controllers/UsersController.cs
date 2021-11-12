@@ -11,7 +11,6 @@ using System.Web.Mvc;
 
 namespace Project.Areas.Admin.Controllers
 {
-    
     public class UsersController : Controller
     {
         private SugasContext sugasContext = new SugasContext();

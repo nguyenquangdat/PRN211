@@ -5,10 +5,9 @@ using System.Web;
 
 namespace Project.Models
 {
-    
-    public class ggrg
+    public class Cart
     {
-        public String Name { get; set; }
-        public String Ho { get; set; }
+        public int id { get; set; }
+        public string name { get; set; }
     }
 }

@@ -152,13 +152,11 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\CategoriesController.cs" />
-    <Compile Include="Areas\Admin\Controllers\ContactsController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProductController.cs" />
     <Compile Include="Areas\Admin\Controllers\RolesController.cs" />
     <Compile Include="Areas\Admin\Controllers\TagsController.cs" />
     <Compile Include="Areas\Admin\Controllers\UsersController.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
-    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\UserController.cs" />
@@ -178,22 +176,31 @@
     <Compile Include="Migrations\202110200508182_UserLogin.Designer.cs">
       <DependentUpon>202110200508182_UserLogin.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202111101253518_contact.cs" />
-    <Compile Include="Migrations\202111101253518_contact.Designer.cs">
-      <DependentUpon>202111101253518_contact.cs</DependentUpon>
+    <Compile Include="Migrations\202111101039351_add.cs" />
+    <Compile Include="Migrations\202111101039351_add.Designer.cs">
+      <DependentUpon>202111101039351_add.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202111101334441_fixdate.cs" />
-    <Compile Include="Migrations\202111101334441_fixdate.Designer.cs">
-      <DependentUpon>202111101334441_fixdate.cs</DependentUpon>
+    <Compile Include="Migrations\202111101411145_Order.cs" />
+    <Compile Include="Migrations\202111101411145_Order.Designer.cs">
+      <DependentUpon>202111101411145_Order.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202111101421060_Orders.cs" />
+    <Compile Include="Migrations\202111101421060_Orders.Designer.cs">
+      <DependentUpon>202111101421060_Orders.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202111120257327_Orders1.cs" />
+    <Compile Include="Migrations\202111120257327_Orders1.Designer.cs">
+      <DependentUpon>202111120257327_Orders1.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\202111111558443_changePassword.cs" />
     <Compile Include="Migrations\202111111558443_changePassword.Designer.cs">
       <DependentUpon>202111111558443_changePassword.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Cart.cs" />
     <Compile Include="Models\Categories.cs" />
-    <Compile Include="Models\Contact.cs" />
     <Compile Include="Models\Login.cs" />
+    <Compile Include="Models\Order.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\Roles.cs" />
     <Compile Include="Models\Tags.cs" />
@@ -575,6 +582,8 @@
     <Content Include="Views\Category\GetCategory.cshtml" />
     <Content Include="Views\Product\GetLastestProductByCategory.cshtml" />
     <Content Include="Views\Category\GetLatestCategory.cshtml" />
+    <Content Include="Views\User\Orders.cshtml" />
+    <Content Include="Views\Product\addToCart.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -603,11 +612,17 @@
     <EmbeddedResource Include="Migrations\202110200508182_UserLogin.resx">
       <DependentUpon>202110200508182_UserLogin.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202111101253518_contact.resx">
-      <DependentUpon>202111101253518_contact.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202111101039351_add.resx">
+      <DependentUpon>202111101039351_add.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202111101334441_fixdate.resx">
-      <DependentUpon>202111101334441_fixdate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202111101411145_Order.resx">
+      <DependentUpon>202111101411145_Order.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202111101421060_Orders.resx">
+      <DependentUpon>202111101421060_Orders.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202111120257327_Orders1.resx">
+      <DependentUpon>202111120257327_Orders1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202111111558443_changePassword.resx">
       <DependentUpon>202111111558443_changePassword.cs</DependentUpon>
